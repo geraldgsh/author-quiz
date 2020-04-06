@@ -85,12 +85,16 @@ const App = () => {
   )
 }
 
+const AuthorWrapper = () => {
+  return <AddAuthorForm onAddAuthor={console.log} />;
+}
+
 const render = () => {
   ReactDOM.render(
     <BrowserRouter>
     <React.Fragment>
       <Route exact path="/" component={App} />
-      <Route exact path="/add" component={AddAuthorForm} />
+      <Route exact path="/add" component={AuthorWrapper} />
     </React.Fragment>      
     </BrowserRouter>,
     document.getElementById('root')
