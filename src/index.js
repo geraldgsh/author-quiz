@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route} from 'react-router-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
+import AddAuthorForm from './AddAuthorForm';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'underscore';
 
@@ -76,13 +77,6 @@ const onAnswerSelected = (answer) => {
   const isCorrect = state.turnData.author.books.some((book) => book === answer);
   state.highlight = isCorrect ? 'correct' : 'wrong';
   render();
-}
-
-const AddAuthorForm = ({match}) => {
-  return <div>
-    <h1>Add Author</h1>
-    <p>{JSON.stringify(match)}</p>
-  </div>
 }
 
 const App = () => {
