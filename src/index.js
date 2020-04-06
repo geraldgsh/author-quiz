@@ -17,10 +17,15 @@ const authors = [
   }  
 ]
 
+const state = {
+  turnData: {
+    author: authors[0],
+    books: authors[0].books
+  }
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthorQuiz />
-  </React.StrictMode>,
+  <AuthorQuiz {...state} />,
   document.getElementById('root')
 );
 
