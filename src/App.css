@@ -10,6 +10,18 @@
  max-height: 100%;
 }
 
+.answer {
+  background-color: #F0F7FD;
+  border-color: #D0E3F0;
+  margin-bottom: 20PX;
+  padding: 15px 30px 15px 30px;
+  cursor: pointer;
+}
+
+.answer:hover {
+  background-color: #D0E3F0;
+}
+
 .book {
   background-color: #F0F7FD;
   border-color: indigo;
