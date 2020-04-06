@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import './bootstrap.min.css'
 
@@ -14,22 +13,31 @@ const Hero = () => {
   ) 
 }
 
-const Book = ({title}) => {
+const Book = ({title, onClick}) => {
   return (
-  <div className="answer">
+  <div className="answer" onClick={() => {onClick(title);}}>
     <h4>{title}</h4>
   </div>
   )
 }
 
-const Turn = ({author, books}) => {
+const highlightToBgColor = highlight => {
+  const mapping = {
+    'none': '',
+    'correct': 'green',
+    'wrong': 'red'
+  }
+  return mapping[highlight];
+};
+
+const Turn = ({author, books, highlight, onAnswerSelected}) => {
   return (
-  <div className="row turn" style={{backgroubd: "white"}}>
+    <div className="row turn" style={{backgroundColor: highlightToBgColor(highlight)}}>
     <div className="col-4 offset-1">
       <img src={author.imageUrl} className="authorimage" alt="Author"/>
     </div>
     <div className="col-6">
-      {books.map((title) => <Book title={title} key={title} />)}
+      {books.map((title) => <Book title={title} key={title} onClick={onAnswerSelected} />)}
     </div>
   </div>
   )
@@ -45,11 +53,11 @@ const Footer = () => {
   )
 }
 
-const AuthorQuiz = ({turnData}) => {
+const AuthorQuiz = ({turnData, highlight, onAnswerSelected}) => {
   return (
     <div className="container-fluid">
       <Hero />
-      <Turn {...turnData}/>
+      <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
       <Continue />
       <Footer />
     </div>   
