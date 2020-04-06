@@ -12,6 +12,7 @@
 
 .answer {
   background-color: #F0F7FD;
+  border-left: 5px solid #D0E3F0;
   border-color: #D0E3F0;
   margin-bottom: 20PX;
   padding: 15px 30px 15px 30px;
