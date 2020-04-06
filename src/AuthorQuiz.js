@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-
 import './App.css';
 import './bootstrap.min.css'
 
@@ -57,17 +57,51 @@ Turn.prototype = {
   highlight: Proptypes.string.isRequired
 };
 
-const Continue = () => {
-  return (<div/>)
+function Continue({ show, onContinue }) {
+  return (
+    <div className="row continue">
+      {show
+        ? <div className="col-11">
+          <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue</button>
+        </div>
+        : null}
+    </div>
+  );
 }
 
 const Footer = () => {
   return (
-    <div id="footer" className="row"></div>
+    <div id="footer" className="row">
+      <p className="text-muted credit">
+        All images are from 
+        <a href="https://commons.wikimedia.org/wiki/Main_Page">
+        Wikimedia Commons</a> 
+        and are in the public domain
+      </p>
+    </div>
   )
 }
 
-const AuthorQuiz = ({turnData, highlight, onAnswerSelected}) => {
+const mapStateToProps = (state) => {
+  return {
+    turnData: state.turnData,
+    highlight: state.highlight,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAnswerSelected: (answer) => {
+      dispatch({ type: 'ANSWER_SELECTED', answer })
+    },
+    onContinue: () => {
+      dispatch({ type: 'CONTINUE' })
+    }
+  }
+}
+
+const AuthorQuiz = connect(mapStateToProps, mapDispatchToProps)(
+  function({turnData, highlight, onAnswerSelected}) {
   return (
     <div className="container-fluid">
       <Hero />
@@ -77,6 +111,6 @@ const AuthorQuiz = ({turnData, highlight, onAnswerSelected}) => {
       <Footer />
     </div>   
   ); 
-}
+});
 
 export default AuthorQuiz;

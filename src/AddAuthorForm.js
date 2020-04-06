@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './AddAuthorForm.css'
 
 class AuthorForm extends React.Component {
@@ -44,7 +46,7 @@ class AuthorForm extends React.Component {
         <input type="text" name="bookTemp" value={this.state.bookTemp} onChange={this.onFieldChange} />
         <input type="button" value="+" onClick={this.handleAddBook}/>
       </div>
-      <input type="submit" value="add"/>
+      <input type="submit" value="Add"/>
     </form>    
   }
 }
@@ -56,4 +58,13 @@ const AddAuthorForm = ({match, onAddAuthor}) => {
   </div>
 }
 
-export default AddAuthorForm;
+function mapDispatchToProps(dispatch, props) {
+  return {
+      onAddAuthor: (author) => {
+        dispatch({ type: 'ADD_AUTHOR', author });
+        props.history.push('/');
+      }
+  };
+}
+
+export default withRouter(connect(() => { }, mapDispatchToProps)(AddAuthorForm));
